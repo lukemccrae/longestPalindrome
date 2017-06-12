@@ -1,44 +1,20 @@
-longestPalindrome=function(string){
+longestPalindrome=function(s){
+  var longest = 0;
+  var length = s.length;
 
-  var result = [];
-  //if string is length 1, return it
-  if(string.length === 1) {
-    return string
-  }
-  //make input lower case
-  var str = string.toLowerCase()
-
-  //create reversed string variable
-  var rev = str.split("").reverse().join("")
-
-  //for loop the length of str
-  //compare last of str to beginning of rev
-  //compare last two of str to beginning two of rev, etc until the last of rev is compared to the beginning of str
-  //if a match is found, and the result array is empty, save
-  //if result array is not empty,
-
-  function checkLetters(check) {
-    for (var j = 0; j < check; j++) {
-      if(str[str.length - 1] === rev[check]) {
-
+  for(var i=0; i < length; i++){
+    for(var j = i+1; j <= length; j++) {
+      var str = s.slice(i,j);
+      var l = str.length
+      if(isPalindrome(str) && longest < l) {
+        longest = l;
       }
     }
   }
-
-  for (var i = 0; i < str.length; i++) {
-    var check = 1;
-    if(i >= str.length / 2) {
-      check--;
-    } else {
-      check++;
-    }
-    checkLetters(check)
-  }
+  return longest;
 }
 
-longestPalindrome("I like racecars that go fast")
-
-// tsaf og taht sracecar ekil i
-// i like racecars that go fast
-
-1
+function isPalindrome(s) {
+  var arr = s.split("");
+  return s == arr.reverse().join("");
+}
